@@ -24,13 +24,7 @@ namespace ContosoUWebAPI.DAL
         public bool DeleteStudent(int studentId)
         {
             int rowsAffected = _db.Execute(@"DELETE FROM [Student] WHERE ID = @StudentId", new { StudentId = studentId });
-
-            if (rowsAffected > 0)
-            {
-                return true;
-            }
-
-            return false;
+            return rowsAffected > 0; 
         }
 
         /// <summary>
@@ -49,7 +43,7 @@ namespace ContosoUWebAPI.DAL
         /// <returns>A single record as the result of a SELECT...WHERE statement in SQL</returns>
         public Student GetSingleStudent(int studentId)
         {
-            return _db.Query<Student>("SELECT [ID], [LastName], [FirstMidName], [EnrollmentDate] FROM [Student] WHERE ID = @ID", 
+            return _db.Query<Student>(@"SELECT [ID], [LastName], [FirstMidName], [EnrollmentDate] FROM [Student] WHERE ID = @ID", 
                 new { ID = studentId }).FirstOrDefault();
         }
 
@@ -60,7 +54,7 @@ namespace ContosoUWebAPI.DAL
         /// <returns>A boolean to determine whether or not the student was successfully added</returns>
         public bool InsertStudent(Student student)
         {
-            int rowsAffected = this._db.Execute(@"INSERT Student([LastName],[FirstMidName], [EnrollmentDate]) 
+            int rowsAffected = _db.Execute(@"INSERT Student([LastName],[FirstMidName], [EnrollmentDate]) 
                                                 values (@StudentLastName, @StudentFirstMidName, @EnrollDate)", 
                 new
                 {
@@ -69,12 +63,7 @@ namespace ContosoUWebAPI.DAL
                     EnrollDate = student.EnrollmentDate
                 });
 
-            if (rowsAffected > 0)
-            {
-                return true;
-            }
-
-            return false;
+            return rowsAffected > 0;
         }
 
         /// <summary>

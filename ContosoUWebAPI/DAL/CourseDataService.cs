@@ -25,7 +25,12 @@
         /// <returns>A boolean</returns>
         public bool DeleteCourse(int courseId)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute(@"DELETE FROM [Course] WHERE CourseID = @CourseId", 
+                new
+                {
+                    CourseId = courseId
+                });
+            return rowsAffected > 0; 
         }
 
         /// <summary>
