@@ -1,13 +1,13 @@
-﻿using ContosoUWebAPI.Models;
-using Dapper;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-
-namespace ContosoUWebAPI.DAL
+﻿namespace ContosoUWebAPI.DAL
 {
+    using ContosoUWebAPI.Models;
+    using Dapper;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+
     /// <summary>
     /// This is the class that would be called through DI (dependency injection)
     /// at the time that the API controller calls for various actions
@@ -24,6 +24,7 @@ namespace ContosoUWebAPI.DAL
         public bool DeleteStudent(int studentId)
         {
             int rowsAffected = _db.Execute(@"DELETE FROM [Student] WHERE ID = @StudentId", new { StudentId = studentId });
+
             return rowsAffected > 0; 
         }
 
@@ -55,7 +56,7 @@ namespace ContosoUWebAPI.DAL
         public bool InsertStudent(Student student)
         {
             int rowsAffected = _db.Execute(@"INSERT Student([LastName],[FirstMidName], [EnrollmentDate]) 
-                                                values (@StudentLastName, @StudentFirstMidName, @EnrollDate)", 
+                                             VALUES (@StudentLastName, @StudentFirstMidName, @EnrollDate)", 
                 new
                 {
                     StudentLastName = student.LastName,
@@ -63,6 +64,7 @@ namespace ContosoUWebAPI.DAL
                     EnrollDate = student.EnrollmentDate
                 });
 
+            // Having this written for readability
             return rowsAffected > 0;
         }
 
@@ -73,7 +75,11 @@ namespace ContosoUWebAPI.DAL
         /// <returns>A boolean to determine whether or not the student was successfully updated</returns>
         public bool UpdateStudent(Student student)
         {
-            throw new System.NotImplementedException();
+            int rowsAffected = _db.Execute(@"UPDATE [Student] 
+                                             SET [LastName] = @LastName,
+                                                 [FirstMidName] = @FirstMidName
+                                                 WHERE ID = " + student.ID, student);
+            return rowsAffected > 0;
         }
     }
 }

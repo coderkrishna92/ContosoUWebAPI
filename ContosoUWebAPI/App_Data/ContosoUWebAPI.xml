@@ -503,7 +503,7 @@
             Constructor for the controller
             </summary>
             <param name="studentDataService">The student data service to make the attempt for having the necessary 
-            IoC</param>
+            IoC/Factory pattern being used</param>
         </member>
         <member name="M:ContosoUWebAPI.Controllers.StudentsController.AddStudent(ContosoUWebAPI.Models.Student)">
             <summary>
@@ -518,6 +518,13 @@
             </summary>
             <param name="studentId">The studentId that is to be deleted</param>
             <returns>A boolean to find out whether or not a student was deleted</returns>
+        </member>
+        <member name="M:ContosoUWebAPI.Controllers.StudentsController.GetStudent(System.Int32)">
+            <summary>
+            Controller method to get the single student
+            </summary>
+            <param name="studentId">The student Id from which you will retrieve the data</param>
+            <returns>The student of interest</returns>
         </member>
         <member name="T:ContosoUWebAPI.DAL.CourseDataService">
             <summary>
@@ -552,6 +559,52 @@
             <param name="course">The course to update</param>
             <returns>A boolean determining whether or not a course was updated</returns>
         </member>
+        <member name="M:ContosoUWebAPI.DAL.CourseDataService.GetSingleCourse(System.Int32)">
+            <summary>
+            Returns a single course from the database
+            </summary>
+            <param name="courseId">The course ID</param>
+            <returns>Course</returns>
+        </member>
+        <member name="T:ContosoUWebAPI.DAL.EnrollmentDataService">
+            <summary>
+            All CRUD operations for the enrollments
+            </summary>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.EnrollmentDataService.DeleteEnrollment(System.Int32)">
+            <summary>
+            Deletes an enrollment
+            </summary>
+            <param name="enrollmentId">Enrollment ID to delete</param>
+            <returns>A boolean</returns>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.EnrollmentDataService.GetAllEnrollments">
+            <summary>
+            Gets all enrollments
+            </summary>
+            <returns>List of enrollments</returns>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.EnrollmentDataService.InsertEnrollment(ContosoUWebAPI.Models.Enrollment)">
+            <summary>
+            Adds a new enrollment
+            </summary>
+            <param name="enrollment">The object (or enrollment) to be added</param>
+            <returns>A boolean determining whether records are added or not</returns>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.EnrollmentDataService.UpdateEnrollment(ContosoUWebAPI.Models.Enrollment)">
+            <summary>
+            Updates an enrollment
+            </summary>
+            <param name="enrollment">The enrollment record to be updated</param>
+            <returns>A boolean determining whether or not the record was updated</returns>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.EnrollmentDataService.GetSingleEnrollment(System.Int32)">
+            <summary>
+            The ability to get a single enrollment record
+            </summary>
+            <param name="enrollmentId">The enrollment Id (the primary key)</param>
+            <returns>A single record</returns>
+        </member>
         <member name="T:ContosoUWebAPI.DAL.ICourseDataService">
             <summary>
             The ICourseDataService will contain the method definitions, and the implementation of 
@@ -585,6 +638,13 @@
             <param name="course">The course entity to update</param>
             <returns>A boolean value to say whether or not a course was updated successfully</returns>
         </member>
+        <member name="M:ContosoUWebAPI.DAL.ICourseDataService.GetSingleCourse(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="courseId"></param>
+            <returns></returns>
+        </member>
         <member name="T:ContosoUWebAPI.DAL.IEnrollmentDataService">
             <summary>
             The EnrollmentDataService methods are only created and defined in the interface. 
@@ -598,6 +658,34 @@
             are being defined.  Implementation is defined in the StudentDataService
             class.
             </summary>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.IStudentDataService.GetAllStudents">
+            <summary>
+            Method to get all the students
+            </summary>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.IStudentDataService.GetSingleStudent(System.Int32)">
+            <summary>
+            Method that will return a single student given a student id.
+            </summary>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.IStudentDataService.InsertStudent(ContosoUWebAPI.Models.Student)">
+            <summary>
+            Adds a student to the database
+            </summary>
+            <param name="student">Student to add to the database</param>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.IStudentDataService.DeleteStudent(System.Int32)">
+            <summary>
+            Deletes a student from the database
+            </summary>
+            <param name="studentId">The Student Id to use for deletion</param>
+        </member>
+        <member name="M:ContosoUWebAPI.DAL.IStudentDataService.UpdateStudent(ContosoUWebAPI.Models.Student)">
+            <summary>
+            Updates a student in the database
+            </summary>
+            <param name="student">Student to update</param>
         </member>
         <member name="T:ContosoUWebAPI.DAL.StudentDataService">
             <summary>

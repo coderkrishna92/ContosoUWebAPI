@@ -1,15 +1,15 @@
-﻿using System;
-using Dapper;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using ContosoUWebAPI.Models;
-using System.Diagnostics;
-
-namespace ContosoUWebAPI.DAL
+﻿namespace ContosoUWebAPI.DAL
 {
+    using System;
+    using Dapper;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using ContosoUWebAPI.Models;
+    using System.Diagnostics;
+
     /// <summary>
     /// All CRUD operations for the enrollments
     /// </summary>

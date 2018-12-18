@@ -1,8 +1,8 @@
-﻿using ContosoUWebAPI.Models;
-using System.Collections.Generic;
-
-namespace ContosoUWebAPI.DAL
+﻿namespace ContosoUWebAPI.DAL
 {
+    using ContosoUWebAPI.Models;
+    using System.Collections.Generic;
+
     /// <summary>
     /// The ICourseDataService will contain the method definitions, and the implementation of 
     /// each method is contained in the CourseDataService class

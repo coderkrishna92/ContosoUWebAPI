@@ -1,9 +1,9 @@
-﻿using ContosoUWebAPI.DAL;
-using ContosoUWebAPI.Models;
-using System.Web.Http;
-
-namespace ContosoUWebAPI.Controllers
+﻿namespace ContosoUWebAPI.Controllers
 {
+    using ContosoUWebAPI.DAL;
+    using ContosoUWebAPI.Models;
+    using System.Web.Http;
+
     /// <summary>
     /// This is the student controller
     /// </summary>
@@ -15,7 +15,7 @@ namespace ContosoUWebAPI.Controllers
         /// Constructor for the controller
         /// </summary>
         /// <param name="studentDataService">The student data service to make the attempt for having the necessary 
-        /// IoC</param>
+        /// IoC/Factory pattern being used</param>
         public StudentsController(IStudentDataService studentDataService)
         {
             _studentDataService = studentDataService;
@@ -27,6 +27,7 @@ namespace ContosoUWebAPI.Controllers
         /// <param name="student">The student to add</param>
         /// <returns>A boolean to determine whether or not the student was added successfully</returns>
         [Route("api/Students/Add")]
+        [HttpPost]
         public bool AddStudent(Student student)
         {
             return _studentDataService.InsertStudent(student); 
@@ -41,6 +42,18 @@ namespace ContosoUWebAPI.Controllers
         public bool DeleteStudent(int studentId)
         {
             return _studentDataService.DeleteStudent(studentId); 
+        }
+
+        /// <summary>
+        /// Controller method to get the single student
+        /// </summary>
+        /// <param name="studentId">The student Id from which you will retrieve the data</param>
+        /// <returns>The student of interest</returns>
+        [Route("api/Students/GetStudent/{id}")]
+        [HttpGet]
+        public Student GetStudent(int studentId)
+        {
+            return _studentDataService.GetSingleStudent(studentId);
         }
     }
 }
