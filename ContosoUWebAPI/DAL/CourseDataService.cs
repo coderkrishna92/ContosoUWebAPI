@@ -59,7 +59,8 @@
         /// <returns>A boolean determining whether or not a course was updated</returns>
         public bool UpdateCourse(Course course)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute("UPDATE [Course] SET [Title] = @CourseTitle ,[Credits] = @CourseCredits WHERE CourseID = " + course.CourseID, course);
+            return rowsAffected > 0;
         }
 
         /// <summary>
