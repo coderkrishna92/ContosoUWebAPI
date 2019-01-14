@@ -1,14 +1,14 @@
 ﻿namespace ContosoUWebAPI.DAL
 {
-    using System;
+    using ContosoUWebAPI.Models;
     using Dapper;
+    using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Linq;
-    using ContosoUWebAPI.Models;
     using System.Diagnostics;
+    using System.Linq;
 
     /// <summary>
     /// All CRUD operations for the enrollments
@@ -24,7 +24,12 @@
         /// <returns>A boolean</returns>
         public bool DeleteEnrollment(int enrollmentId)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute(@"DELETE FROM [Course] WHERE EnrollmentID = @EnrollmentId",
+                new
+                {
+                    EnrollmentId = enrollmentId
+                });
+            return rowsAffected > 0;
         }
 
         /// <summary>
@@ -53,7 +58,8 @@
         /// <returns>A boolean determining whether or not the record was updated</returns>
         public bool UpdateEnrollment(Enrollment enrollment)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute("UPDATE [Course] SET [Title] = @CourseTitle ,[Credits] = @CourseCredits WHERE CourseID = " + course.CourseID, course);
+            return rowsAffected > 0;
         }
 
         /// <summary>
@@ -71,7 +77,7 @@
             catch (Exception ex)
             {
                 Debug.WriteLine("There was an error that occurred: " + ex.Message.ToString());
-                return null; 
+                return null;
             }
         }
     }

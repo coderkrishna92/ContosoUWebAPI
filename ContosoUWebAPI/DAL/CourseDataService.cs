@@ -49,7 +49,15 @@
         /// <returns>A boolean to let us know whether a course was added successfully</returns>
         public bool InsertCourse(Course course)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute(@"INSERT Course([CourseID],[Title],[Credits]) values (@CourseId, @Title, @Credits)", 
+                new
+                {
+                    CourseId = course.CourseID,
+                    Title = course.Title,
+                    Credits = course.Credits
+                });
+
+            return rowsAffected > 0;
         }
 
         /// <summary>
