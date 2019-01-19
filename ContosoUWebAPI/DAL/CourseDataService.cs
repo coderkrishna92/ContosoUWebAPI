@@ -53,8 +53,8 @@
                 new
                 {
                     CourseId = course.CourseID,
-                    Title = course.Title,
-                    Credits = course.Credits
+                    course.Title,
+                    course.Credits
                 });
 
             return rowsAffected > 0;

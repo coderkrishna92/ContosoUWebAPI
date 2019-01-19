@@ -48,7 +48,14 @@
         /// <returns>A boolean determining whether records are added or not</returns>
         public bool InsertEnrollment(Enrollment enrollment)
         {
-            throw new NotImplementedException();
+            int rowsAffected = _db.Execute(@"INSERT Enrollment([CourseID], [StudentID], [Grade]) VALUES (@CourseId, @StudentID, @Grade)", 
+                new
+                {
+                    CourseId = enrollment.CourseID, 
+                    StudentId = enrollment.StudentID,
+                    enrollment.Grade
+                });
+            return rowsAffected > 0;
         }
 
         /// <summary>
@@ -58,7 +65,7 @@
         /// <returns>A boolean determining whether or not the record was updated</returns>
         public bool UpdateEnrollment(Enrollment enrollment)
         {
-            int rowsAffected = _db.Execute("UPDATE [Course] SET [Title] = @CourseTitle ,[Credits] = @CourseCredits WHERE CourseID = " + course.CourseID, course);
+            int rowsAffected = _db.Execute("UPDATE [Enrollment] SET [CourseID] = @courseId ,[StudentID] = @studentId WHERE EnrollmentID = " + enrollment.EnrollmentID, enrollment);
             return rowsAffected > 0;
         }
 
